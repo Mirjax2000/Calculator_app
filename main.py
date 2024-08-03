@@ -1,6 +1,8 @@
 import customtkinter as ctk  # type: ignore
 from icecream import ic  # type: ignore
 
+ctk.set_appearance_mode("system")
+
 
 class App(ctk.CTk):
     def __init__(self):
@@ -8,10 +10,9 @@ class App(ctk.CTk):
         self.btn_font = ("Helvetica", 50, "bold")
         self.main_color = "#0053a5"
         self.second_color = "#3fa3ff"
-        self.start_flag = True
+        self.result_flag = True
         self.curl_flag = True
         self.temp = []
-        ic(self.temp)
         super().__init__()
 
         # title, icon, size
@@ -58,18 +59,31 @@ class App(ctk.CTk):
             self.main_frame.input.insert(0, "")
 
     def add_num(self, value):
-        vstup = self.main_frame.input.get()
-        self.main_frame.input.delete(0, ctk.END)
-        self.main_frame.input.insert(0, vstup + value)
+        if self.result_flag == False:
+            self.main_frame.input.delete(0, ctk.END)
+            self.main_frame.input.insert(0, value)
+            self.result_flag = True
+        else:
+            vstup = self.main_frame.input.get()
+            self.main_frame.input.delete(0, ctk.END)
+            self.main_frame.input.insert(0, vstup + value)
 
     def add_operator(self, operator):
-        pass
+        vstup = self.main_frame.input.get()
+        self.result_flag = True
+        if vstup:
+            self.main_frame.input.delete(0, ctk.END)
+            self.main_frame.input.insert(0, vstup + operator)
+            self.secondary_frame.label_1.configure(text=self.temp)
 
     def add_curl(self):
         pass
 
     def do_math(self):
-        pass
+        result = eval(self.main_frame.input.get())
+        self.main_frame.input.delete(0, ctk.END)
+        self.main_frame.input.insert(0, result)
+        self.result_flag = False
 
     # endregion
 
@@ -85,7 +99,11 @@ class MainFrame(ctk.CTkFrame):
 
         # region
         self.input = ctk.CTkEntry(
-            self, font=parent.font, border_width=2, border_color="#5c5f63", width=490
+            self,
+            font=parent.font,
+            border_width=2,
+            border_color="#5c5f63",
+            width=490,
         )
         self.input.get()
         self.input.insert(0, "")
@@ -248,7 +266,7 @@ class SecondaryFrame(ctk.CTkFrame):
 
         self.label_1 = ctk.CTkLabel(
             self,
-            text="kuk",
+            text="",
             font=("Helvetica", 20, "normal"),
             text_color="gray",
             width=483,
