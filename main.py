@@ -58,7 +58,9 @@ class App(ctk.CTk):
             self.main_frame.input.insert(0, "")
 
     def add_num(self, value):
-        pass
+        vstup = self.main_frame.input.get()
+        self.main_frame.input.delete(0, ctk.END)
+        self.main_frame.input.insert(0, vstup + value)
 
     def add_operator(self, operator):
         pass
