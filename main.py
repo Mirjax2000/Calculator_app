@@ -108,9 +108,7 @@ class MainFrame(ctk.CTkFrame):
             border_width=2,
             border_color="#5c5f63",
             width=490,
-        )
-        self.input.get()
-        self.input.insert(0, "")
+        ).grid(row=0, column=0, columnspan=3, sticky="ew", padx=5, pady=5)
 
         self.button_1 = ctk.CTkButton(
             self,
@@ -118,166 +116,174 @@ class MainFrame(ctk.CTkFrame):
             font=parent.btn_font,
             fg_color=parent.main_color,
             command=lambda: parent.add_num("1"),
-        )
+        ).grid(row=1, column=0, sticky="ew", padx=5, pady=5)
+
         self.button_2 = ctk.CTkButton(
             self,
             text="2",
             font=parent.btn_font,
             fg_color=parent.main_color,
             command=lambda: parent.add_num("2"),
-        )
+        ).grid(row=1, column=1, sticky="ew", padx=5, pady=5)
+
         self.button_3 = ctk.CTkButton(
             self,
             text="3",
             font=parent.btn_font,
             fg_color=parent.main_color,
             command=lambda: parent.add_num("3"),
-        )
+        ).grid(row=1, column=2, sticky="ew", padx=5, pady=5)
+
         self.button_4 = ctk.CTkButton(
             self,
             text="4",
             font=parent.btn_font,
             fg_color=parent.main_color,
             command=lambda: parent.add_num("4"),
-        )
+        ).grid(row=2, column=0, sticky="ew", padx=5, pady=5)
+
         self.button_5 = ctk.CTkButton(
             self,
             text="5",
             font=parent.btn_font,
             fg_color=parent.main_color,
             command=lambda: parent.add_num("5"),
-        )
+        ).grid(row=2, column=1, sticky="ew", padx=5, pady=5)
+
         self.button_6 = ctk.CTkButton(
             self,
             text="6",
             fg_color=parent.main_color,
             font=parent.btn_font,
             command=lambda: parent.add_num("6"),
-        )
+        ).grid(row=2, column=2, sticky="ew", padx=5, pady=5)
+
         self.button_7 = ctk.CTkButton(
             self,
             text="7",
             fg_color=parent.main_color,
             font=parent.btn_font,
             command=lambda: parent.add_num("7"),
-        )
+        ).grid(row=3, column=0, sticky="ew", padx=5, pady=5)
+
         self.button_8 = ctk.CTkButton(
             self,
             text="8",
             fg_color=parent.main_color,
             font=parent.btn_font,
             command=lambda: parent.add_num("8"),
-        )
+        ).grid(row=3, column=1, sticky="ew", padx=5, pady=5)
+
         self.button_9 = ctk.CTkButton(
             self,
             text="9",
             fg_color=parent.main_color,
             font=parent.btn_font,
             command=lambda: parent.add_num("9"),
-        )
+        ).grid(row=3, column=2, sticky="ew", padx=5, pady=5)
+
         self.button_0 = ctk.CTkButton(
             self,
             text="0",
             fg_color=parent.main_color,
             font=parent.btn_font,
             command=lambda: parent.add_num("0"),
-        )
+        ).grid(row=4, column=1, sticky="ew", padx=5, pady=5)
+
         self.button_neg = ctk.CTkButton(
-            self, text="+/-", font=parent.btn_font, command=lambda: parent.negative()
-        )
+            self, text="+/-", font=parent.btn_font, command=parent.negative
+        ).grid(row=4, column=0, sticky="ew", padx=5, pady=5)
+
         self.button_eqa = ctk.CTkButton(
             self,
             text="=",
             fg_color=parent.second_color,
             font=parent.btn_font,
             command=lambda: parent.do_math(),
-        )
+        ).grid(row=7, column=1, columnspan=2, sticky="ew", padx=5, pady=5)
+
         self.button_plus = ctk.CTkButton(
             self,
             text="+",
             font=parent.btn_font,
             command=lambda: parent.add_operator(" + "),
-        )
+        ).grid(row=5, column=0, sticky="ew", padx=5, pady=5)
+
         self.button_minus = ctk.CTkButton(
             self,
             text="-",
             font=parent.btn_font,
             command=lambda: parent.add_operator(" - "),
-        )
+        ).grid(row=5, column=1, sticky="ew", padx=5, pady=5)
+
         self.button_multy = ctk.CTkButton(
             self,
             text="*",
             font=parent.btn_font,
             command=lambda: parent.add_operator(" * "),
-        )
+        ).grid(row=5, column=2, sticky="ew", padx=5, pady=5)
+
         self.button_divide = ctk.CTkButton(
             self,
             text="/",
             font=parent.btn_font,
             command=lambda: parent.add_operator(" / "),
-        )
+        ).grid(row=6, column=0, sticky="ew", padx=5, pady=5)
+
         self.button_cls = ctk.CTkButton(
             self,
             text="cls",
             font=parent.btn_font,
             command=parent.clear_text,
-        )
+        ).grid(row=6, column=1, columnspan=2, sticky="ew", padx=5, pady=5)
 
         self.button_curl = ctk.CTkButton(
             self,
             text="( )",
             font=parent.btn_font,
             command=lambda: parent.add_curl(),
-        )
+        ).grid(row=7, column=0, sticky="ew", padx=5, pady=5)
+
         self.button_dot = ctk.CTkButton(
             self,
             text=".",
             font=parent.btn_font,
             command=lambda: parent.add_num("."),
-        )
-
-        self.input.grid(row=0, column=0, columnspan=3, sticky="ew", padx=5, pady=5)
-        self.button_1.grid(row=1, column=0, sticky="ew", padx=5, pady=5)
-        self.button_2.grid(row=1, column=1, sticky="ew", padx=5, pady=5)
-        self.button_3.grid(row=1, column=2, sticky="ew", padx=5, pady=5)
-        self.button_4.grid(row=2, column=0, sticky="ew", padx=5, pady=5)
-        self.button_5.grid(row=2, column=1, sticky="ew", padx=5, pady=5)
-        self.button_6.grid(row=2, column=2, sticky="ew", padx=5, pady=5)
-        self.button_7.grid(row=3, column=0, sticky="ew", padx=5, pady=5)
-        self.button_8.grid(row=3, column=1, sticky="ew", padx=5, pady=5)
-        self.button_9.grid(row=3, column=2, sticky="ew", padx=5, pady=5)
-        self.button_0.grid(row=4, column=1, sticky="ew", padx=5, pady=5)
-        self.button_neg.grid(row=4, column=0, sticky="ew", padx=5, pady=5)
-        self.button_dot.grid(row=4, column=2, sticky="ew", padx=5, pady=5)
-        self.button_plus.grid(row=5, column=0, sticky="ew", padx=5, pady=5)
-        self.button_minus.grid(row=5, column=1, sticky="ew", padx=5, pady=5)
-        self.button_multy.grid(row=5, column=2, sticky="ew", padx=5, pady=5)
-        self.button_divide.grid(row=6, column=0, sticky="ew", padx=5, pady=5)
-        self.button_cls.grid(row=6, column=1, columnspan=2, sticky="ew", padx=5, pady=5)
-        self.button_curl.grid(row=7, column=0, sticky="ew", padx=5, pady=5)
-        self.button_eqa.grid(row=7, column=1, columnspan=2, sticky="ew", padx=5, pady=5)
+        ).grid(row=4, column=2, sticky="ew", padx=5, pady=5)
         # endregion
 
 
 class SecondaryFrame(ctk.CTkFrame):
     def __init__(self, parent):
-        self.secondary = ["ahoj", "priklady", "a dalsi", "pravidla", "pomoc"]
+        self.secondary = ["ahoj", "krokodil", "krab", "kangaroo", "ko"]
         super().__init__(parent, width=493)
         self.parent = parent
         self.pack(side=ctk.LEFT, fill=ctk.BOTH, padx=(2, 5), pady=10)
 
         self.columnconfigure(0, weight=1, uniform="a")
-        self.rowconfigure(0, weight=0, uniform="a")
 
-        self.label_1 = ctk.CTkLabel(
-            self,
-            text="",
-            font=("Helvetica", 20, "normal"),
-            text_color="gray",
-            width=483,
-            anchor="w",
-        )
-        self.label_1.grid(row=0, column=0, sticky="w", padx=5, pady=5)
+        for item in self.secondary:
+            line = self.secondary.index(item) + 1
+            self.rowconfigure(line, weight=0, uniform="a")
+            ctk.CTkLabel(
+                self,
+                text=item,
+                font=("Helvetica", 14, "normal"),
+                anchor="w",
+                padx=5,
+                pady=5,
+                width=487,
+            ).grid(row=line, column=0, sticky="w", padx=5, pady=(5, 0))
+
+        # self.label_1 = ctk.CTkLabel(
+        #     self,
+        #     text="",
+        #     font=("Helvetica", 20, "normal"),
+        #     text_color="gray",
+        #     width=483,
+        #     anchor="w",
+        # )
+        # self.label_1.grid(row=0, column=0, sticky="w", padx=5, pady=5)
 
 
 if __name__ == "__main__":
