@@ -1,5 +1,5 @@
 import customtkinter as ctk  # type: ignore
-from icecream import ic
+from icecream import ic  # type: ignore
 
 
 class App(ctk.CTk):
