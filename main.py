@@ -59,13 +59,15 @@ class App(ctk.CTk):
             self.main_frame.input.insert(0, "")
 
     def add_num(self, value):
-        if self.result_flag == False:
+        if not self.result_flag:
             self.main_frame.input.delete(0, ctk.END)
             self.main_frame.input.insert(0, value)
+            self.secondary_frame.label_1.configure(text=value)
             self.result_flag = True
         else:
             vstup = self.main_frame.input.get()
             self.main_frame.input.delete(0, ctk.END)
+            self.secondary_frame.label_1.configure(text=vstup + value)
             self.main_frame.input.insert(0, vstup + value)
 
     def add_operator(self, operator):
@@ -74,15 +76,17 @@ class App(ctk.CTk):
         if vstup:
             self.main_frame.input.delete(0, ctk.END)
             self.main_frame.input.insert(0, vstup + operator)
-            self.secondary_frame.label_1.configure(text=self.temp)
+            self.secondary_frame.label_1.configure(text=vstup + operator)
 
     def add_curl(self):
         pass
 
     def do_math(self):
+        vstup = self.main_frame.input.get()
         result = eval(self.main_frame.input.get())
         self.main_frame.input.delete(0, ctk.END)
         self.main_frame.input.insert(0, result)
+        self.secondary_frame.label_1.configure(text=f"{vstup} = {result}")
         self.result_flag = False
 
     # endregion
@@ -257,6 +261,7 @@ class MainFrame(ctk.CTkFrame):
 
 class SecondaryFrame(ctk.CTkFrame):
     def __init__(self, parent):
+        self.secondary = ["ahoj", "priklady", "a dalsi", "pravidla", "pomoc"]
         super().__init__(parent, width=493)
         self.parent = parent
         self.pack(side=ctk.LEFT, fill=ctk.BOTH, padx=(2, 5), pady=10)
