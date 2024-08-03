@@ -62,12 +62,12 @@ class App(ctk.CTk):
         if not self.result_flag:
             self.main_frame.input.delete(0, ctk.END)
             self.main_frame.input.insert(0, value)
-            self.secondary_frame.label_1.configure(text=value)
+            self.secondary_frame.secondary.append(value)
             self.result_flag = True
         else:
             vstup = self.main_frame.input.get()
             self.main_frame.input.delete(0, ctk.END)
-            self.secondary_frame.label_1.configure(text=vstup + value)
+            self.secondary_frame.secondary.append(vstup + value)
             self.main_frame.input.insert(0, vstup + value)
 
     def add_operator(self, operator):
@@ -76,7 +76,7 @@ class App(ctk.CTk):
         if vstup:
             self.main_frame.input.delete(0, ctk.END)
             self.main_frame.input.insert(0, vstup + operator)
-            self.secondary_frame.label_1.configure(text=vstup + operator)
+            self.secondary_frame.secondary.append(vstup + operator)
 
     def add_curl(self):
         pass
@@ -86,8 +86,9 @@ class App(ctk.CTk):
         result = eval(self.main_frame.input.get())
         self.main_frame.input.delete(0, ctk.END)
         self.main_frame.input.insert(0, result)
-        self.secondary_frame.label_1.configure(text=f"{vstup} = {result}")
+        self.secondary_frame.secondary.append(f"{vstup} = {result}")
         self.result_flag = False
+        ic(self.secondary_frame.secondary)
 
     # endregion
 
@@ -108,7 +109,9 @@ class MainFrame(ctk.CTkFrame):
             border_width=2,
             border_color="#5c5f63",
             width=490,
-        ).grid(row=0, column=0, columnspan=3, sticky="ew", padx=5, pady=5)
+        )
+        self.input.get()
+        self.input.grid(row=0, column=0, columnspan=3, sticky="ew", padx=5, pady=5)
 
         self.button_1 = ctk.CTkButton(
             self,
@@ -255,7 +258,7 @@ class MainFrame(ctk.CTkFrame):
 
 class SecondaryFrame(ctk.CTkFrame):
     def __init__(self, parent):
-        self.secondary = ["ahoj", "krokodil", "krab", "kangaroo", "ko"]
+        self.secondary = ["ahoj", "děkuji", "pro", "vstup", "v", "ap"]
         super().__init__(parent, width=493)
         self.parent = parent
         self.pack(side=ctk.LEFT, fill=ctk.BOTH, padx=(2, 5), pady=10)
@@ -264,7 +267,6 @@ class SecondaryFrame(ctk.CTkFrame):
 
         for item in self.secondary:
             line = self.secondary.index(item) + 1
-            self.rowconfigure(line, weight=0, uniform="a")
             ctk.CTkLabel(
                 self,
                 text=item,
@@ -275,15 +277,6 @@ class SecondaryFrame(ctk.CTkFrame):
                 width=487,
             ).grid(row=line, column=0, sticky="w", padx=5, pady=(5, 0))
 
-        # self.label_1 = ctk.CTkLabel(
-        #     self,
-        #     text="",
-        #     font=("Helvetica", 20, "normal"),
-        #     text_color="gray",
-        #     width=483,
-        #     anchor="w",
-        # )
-        # self.label_1.grid(row=0, column=0, sticky="w", padx=5, pady=5)
 
 
 if __name__ == "__main__":
